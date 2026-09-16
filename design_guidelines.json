@@ -1,0 +1,281 @@
+{
+  "project_name": "Paulispan ERP",
+  "app_type": "saas_app",
+  "design_archetype": "Modern B2B SaaS Enterprise ERP (Linear/Notion meets Industrial Food Logistics)",
+  "language_locale": "pt-BR",
+  "currency_format": "BRL (R$ 1.250,00)",
+  "color_scheme_strategy": {
+    "concept": "Dark Midnight Slate Sidebar (#0B1120 / #111827) paired with Crisp Warm-Alabaster Working Canvas (#F8FAFC / #FFFFFF) and Warm Amber/Caramel + Deep Navy Brand Accents representing premium dessert manufacturing & distribution without generic AI slop.",
+    "theme_split": {
+      "sidebar_and_navigation": "Dark Executive Slate (Rich Navy-Charcoal with 1px subtle slate borders, high legibility text, glowing active pill indicators)",
+      "workspace_canvas": "Light, crisp, highly scannable enterprise workspace with soft slate card borders, no heavy full-screen gradients, and pristine contrast"
+    },
+    "tokens": {
+      "sidebar": {
+        "bg": "#0B1120",
+        "bg_surface": "#111A2E",
+        "border": "#1E293B",
+        "text_primary": "#F8FAFC",
+        "text_muted": "#94A3B8",
+        "item_hover": "#1E293B",
+        "item_active_bg": "#D97706",
+        "item_active_text": "#FFFFFF",
+        "badge_bg": "rgba(217, 119, 6, 0.18)",
+        "badge_text": "#FBBF24"
+      },
+      "workspace": {
+        "bg": "#F8FAFC",
+        "surface_card": "#FFFFFF",
+        "surface_subtle": "#F1F5F9",
+        "border": "#E2E8F0",
+        "border_strong": "#CBD5E1",
+        "text_primary": "#0F172A",
+        "text_secondary": "#475569",
+        "text_muted": "#64748B"
+      },
+      "brand_primary": {
+        "amber_main": "#D97706",
+        "amber_hover": "#B45309",
+        "amber_light": "#FEF3C7",
+        "amber_dark": "#92400E",
+        "navy_deep": "#0F172A",
+        "navy_accent": "#1E3A8A"
+      },
+      "status_palette": {
+        "aguardando": {
+          "bg": "#FEF3C7",
+          "text": "#92400E",
+          "border": "#FDE68A",
+          "label": "Aguardando"
+        },
+        "em_producao": {
+          "bg": "#EFF6FF",
+          "text": "#1E40AF",
+          "border": "#BFDBFE",
+          "label": "Em Produção"
+        },
+        "faturado": {
+          "bg": "#F3E8FF",
+          "text": "#6B21A8",
+          "border": "#E9D5FF",
+          "label": "Faturado"
+        },
+        "em_rota": {
+          "bg": "#ECFEFF",
+          "text": "#155E75",
+          "border": "#A5F3FC",
+          "label": "Em Rota"
+        },
+        "entregue": {
+          "bg": "#ECFDF5",
+          "text": "#065F46",
+          "border": "#A7F3D0",
+          "label": "Entregue"
+        },
+        "cancelado_devolvido": {
+          "bg": "#FEF2F2",
+          "text": "#991B1B",
+          "border": "#FECACA",
+          "label": "Devolução / Cancelado"
+        }
+      },
+      "charts": {
+        "faturamento": "#D97706",
+        "vendas": "#2563EB",
+        "lucro_margem": "#059669",
+        "devolucoes": "#DC2626",
+        "meta_target": "#64748B"
+      }
+    }
+  },
+  "typography": {
+    "font_families": {
+      "headings_and_brand": "Plus Jakarta Sans, sans-serif",
+      "body_and_forms": "IBM Plex Sans, sans-serif",
+      "numbers_and_tables": "IBM Plex Sans, monospace-numeric (font-feature-settings: 'tnum')"
+    },
+    "cdn_import_link": "@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,350;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');",
+    "hierarchy": {
+      "page_title": "text-2xl sm:text-3xl font-bold font-['Plus_Jakarta_Sans'] tracking-tight text-slate-900",
+      "section_title": "text-lg sm:text-xl font-semibold font-['Plus_Jakarta_Sans'] tracking-tight text-slate-900",
+      "kpi_value": "text-2xl sm:text-3xl font-bold font-['Plus_Jakarta_Sans'] tracking-tight text-slate-900",
+      "kpi_label": "text-xs font-semibold uppercase tracking-wider text-slate-500",
+      "body_base": "text-sm font-normal font-['IBM_Plex_Sans'] text-slate-700 leading-relaxed",
+      "table_header": "text-xs font-semibold uppercase tracking-wider text-slate-500",
+      "table_cell": "text-sm font-medium font-['IBM_Plex_Sans'] text-slate-800",
+      "badge_text": "text-xs font-semibold tracking-wide"
+    }
+  },
+  "layout_architecture": {
+    "shell_structure": "Fixed Dark Sidebar (w-64 or w-72 on desktop, collapsible / sheet on mobile) + Sticky Glass/Solid Topbar (h-16 with global search, filters trigger, notifications & quick actions) + Scrollable Main Content (p-6 lg:p-8 max-w-[1600px] mx-auto)",
+    "sidebar_navigation_groups": [
+      {
+        "group_name": "Principal",
+        "items": [
+          { "id": "dashboard", "label": "Visão Executiva (KPIs)", "icon": "LayoutDashboard", "badge": "Ao Vivo" }
+        ]
+      },
+      {
+        "group_name": "Comercial & Vendas",
+        "items": [
+          { "id": "pedidos", "label": "Pedidos de Venda", "icon": "ShoppingCart", "badge": "14 novos" },
+          { "id": "clientes", "label": "Clientes / Redes & Lojas", "icon": "Store", "badge": null },
+          { "id": "produtos", "label": "Catálogo de Sobremesas", "icon": "Cake", "badge": null }
+        ]
+      },
+      {
+        "group_name": "Operação & Campo",
+        "items": [
+          { "id": "logistica", "label": "Logística & Frotas", "icon": "Truck", "badge": "5 rotas" },
+          { "id": "entregas", "label": "Monitor de Entregas", "icon": "MapPinCheck", "badge": null },
+          { "id": "promotores", "label": "Promotores & Execução", "icon": "ClipboardCheck", "badge": "3 alertas" },
+          { "id": "devolucoes", "label": "Devoluções & Avarias", "icon": "RotateCcw", "badge": "Alerta" }
+        ]
+      },
+      {
+        "group_name": "Gestão & Controle",
+        "items": [
+          { "id": "financeiro", "label": "Financeiro & Margem", "icon": "CircleDollarSign", "badge": null },
+          { "id": "relatorios", "label": "Relatórios & Exportação", "icon": "BarChart3", "badge": null },
+          { "id": "cadastros", "label": "Cadastros Gerais", "icon": "FolderTree", "badge": null },
+          { "id": "configuracoes", "label": "Configurações Paulispan", "icon": "SlidersHorizontal", "badge": null }
+        ]
+      }
+    ],
+    "topbar_elements": {
+      "left": "Mobile menu button + Breadcrumbs com indicador de módulo ativo",
+      "center": "Global Search Input (Busca por Cliente, CNPJ, Número de Pedido, Nota Fiscal, Rota ou Produto) com atalho 'Ctrl+K'",
+      "right": "Filtro Global Rápido (Período: 'Hoje', 'Últimos 7 dias', 'Este Mês') + Botão '+ Novo Pedido' (Amber CTA) + Notificações com badge + Perfil do Operador / Distribuidora"
+    }
+  },
+  "component_design_tokens": {
+    "kpi_cards": {
+      "surface": "bg-white border border-slate-200/90 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200",
+      "anatomy": "Topo: Ícone em quadrado sutil + Tag de variação percentual (verde/vermelho). Meio: Valor em R$ grande e limpo. Rodapé: Micro-contexto comparativo ('vs. período anterior')"
+    },
+    "tables": {
+      "surface": "bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm",
+      "header": "bg-slate-50/80 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-xs font-semibold py-3.5 px-4 text-left",
+      "row": "border-b border-slate-100 hover:bg-amber-50/30 transition-colors duration-150 py-3.5 px-4",
+      "density": "Equilibrada (38px a 44px por linha) com paginação clara e contagem de registros"
+    },
+    "forms_and_modals": {
+      "inputs": "bg-white border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none text-slate-900 transition-all",
+      "labels": "text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 block",
+      "modal_shell": "bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 max-w-3xl w-full"
+    },
+    "buttons": {
+      "primary": "bg-amber-600 hover:bg-amber-700 text-white font-medium text-sm px-4 py-2.5 rounded-lg shadow-sm hover:shadow transition-all duration-150 flex items-center gap-2",
+      "secondary": "bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-medium text-sm px-4 py-2.5 rounded-lg transition-all flex items-center gap-2",
+      "danger": "bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-medium text-sm px-3.5 py-2 rounded-lg transition-all"
+    }
+  },
+  "image_urls": {
+    "hero_and_catalog": [
+      {
+        "category": "catalog_dessert_showcase",
+        "url": "https://images.unsplash.com/photo-1583338917451-face2751d8d5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwxfHxnb3VybWV0JTIwZGVzc2VydCUyMHBhc3RyeSUyMGNha2V8ZW58MHx8fHwxNzg5NTU4Njg4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Vitrine com tortas e bolos gourmet Paulispan para o catálogo e modal de produtos"
+      },
+      {
+        "category": "product_pave_strawberry",
+        "url": "https://images.unsplash.com/photo-1611293388250-580b08c4a145?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwyfHxnb3VybWV0JTIwZGVzc2VydCUyMHBhc3RyeSUyMGNha2V8ZW58MHx8fHwxNzg5NTU4Njg4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Bolo/Pavê premium de morango com chantilly artesanal para destaque de produto mais vendido"
+      },
+      {
+        "category": "product_assortment_tarts",
+        "url": "https://images.unsplash.com/photo-1530648672449-81f6c723e2f1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwzfHxnb3VybWV0JTIwZGVzc2VydCUyMHBhc3RyeSUyMGNha2V8ZW58MHx8fHwxNzg5NTU4Njg4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Porções individuais de confeitaria fina distribuídas para supermercados e padarias"
+      }
+    ],
+    "logistics_and_operations": [
+      {
+        "category": "logistics_fleet_truck",
+        "url": "https://images.unsplash.com/photo-1571989928541-674d0cf46c4a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwyfHxkZWxpdmVyeSUyMHRydWNrJTIwbG9naXN0aWNzJTIwd2FyZWhvdXNlfGVufDB8fHx8MTc4OTU1ODY4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Caminhão baú refrigerado para expedição de rotas Paulispan"
+      },
+      {
+        "category": "dispatch_warehouse",
+        "url": "https://images.unsplash.com/photo-1609143739217-01b60dad1c67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwzfHxkZWxpdmVyeSUyMHRydWNrJTIwbG9naXN0aWNzJTIwd2FyZWhvdXNlfGVufDB8fHx8MTc4OTU1ODY4OHww&ixlib=rb-4.1.0&q=85",
+        "description": "Centro de distribuição e paletização de caixas térmicas Paulispan"
+      }
+    ]
+  },
+  "specific_pages_and_modules": {
+    "dashboard_executivo": {
+      "kpi_metrics": [
+        { "id": "faturamento_mes", "title": "Faturamento Bruto (Mês)", "value": "R$ 487.320,00", "delta": "+14.2%", "status": "positive" },
+        { "id": "pedidos_ativos", "title": "Pedidos em Andamento", "value": "138 pedidos", "delta": "+8 hoje", "status": "neutral" },
+        { "id": "taxa_devolucao", "title": "Índice de Devoluções", "value": "1.8%", "delta": "-0.4%", "status": "positive" },
+        { "id": "lucro_estimado", "title": "Margem Bruta Média", "value": "34.8%", "delta": "+2.1%", "status": "positive" }
+      ],
+      "charts_config": [
+        {
+          "type": "AreaChart / BarChart",
+          "title": "Faturamento vs. Meta Diária (R$)",
+          "subtitle": "Histórico dos últimos 30 dias com projeção de fechamento",
+          "primary_key": "faturamento",
+          "color": "#D97706"
+        },
+        {
+          "type": "BarChart",
+          "title": "Top 5 Sobremesas Mais Vendidas",
+          "subtitle": "Volume em unidades e faturamento gerado",
+          "items": ["Pavê de Chocolate Belga 1.2kg", "Bolo Gelado de Coco", "Torta Holandesa Premium", "Pavê de Morango Trufado", "Cheesecake de Frutas Vermelhas"]
+        },
+        {
+          "type": "PieChart / Donut",
+          "title": "Distribuição de Pedidos por Status",
+          "slices": ["Entregue (68%)", "Em Rota (14%)", "Faturado (10%)", "Em Produção (6%)", "Devolução (2%)"]
+        }
+      ]
+    },
+    "cliente_detalhes_crm": {
+      "header": "Dados cadastrais, CNPJ, Rede/Grupo (ex: Pão de Açúcar, Zona Sul, Padaria Colonial), Limite de Crédito, Saldo em Aberto",
+      "tabs": [
+        "Histórico de Pedidos",
+        "Lojas & Filiais Atendidas",
+        "Financeiro & Títulos",
+        "Relatórios de Devolução",
+        "Visitas dos Promotores & Fotos"
+      ]
+    },
+    "novo_pedido_multitens": {
+      "sections": [
+        "Identificação do Cliente / Loja de Destino",
+        "Tabela interativa de itens (Seleção de Produto, Quantidade Caixas, Preço Unitário, Desconto %, Subtotal)",
+        "Resumo Financeiro (Subtotal, Frete Refrigerado, Impostos, Desconto Especial, Total Líquido R$)",
+        "Condições de Pagamento (Boleto 28dd, Pix Faturado, Cartão) e Data de Entrega Agendada"
+      ]
+    },
+    "logistica_e_rotas": {
+      "features": [
+        "Card de cada Caminhão/Motorista com rota atual, capacidade de carga refrigerada ocupada e paradas restantes",
+        "Tabela de Manifesto de Carga por rota",
+        "Status de Entrega em tempo real com comprovante digital"
+      ]
+    },
+    "promotores_e_trade": {
+      "features": [
+        "Agenda de visitas por loja/supermercado",
+        "Registro de Não Conformidades (ex: temperatura de geladeira incorreta, ruptura de gôndola, vencimento próximo)",
+        "Checklist fotográfico de execução de ponto de venda"
+      ]
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build the complete application with React (.js files) using existing Tailwind and Lucide icons.",
+    "Implement the dark sidebar + light workspace aesthetic strictly. Sidebar must be dark slate (#0B1120) with active amber highlights. Main area must be clean white/slate-50 with crisp 1px borders.",
+    "Do NOT use pure Inter for headings; configure Plus Jakarta Sans and IBM Plex Sans via Google Fonts in index.html or index.css.",
+    "All monetary values MUST follow Brazilian Real standard (e.g., R$ 14.850,00) with comma decimal separators and dot thousand separators.",
+    "All interactive elements (buttons, inputs, tabs, search, filters, links, status selects, pagination, table actions) MUST include data-testid attributes (e.g., data-testid='global-search-input', data-testid='kpi-faturamento-card', data-testid='btn-novo-pedido').",
+    "Never use fully transparent backgrounds on dropdowns, modals, or sticky navigation bars.",
+    "Provide rich interactive mock datasets for Paulispan (Supermercados renomados, padarias gourmet, linhas de sobremesas como Pavês 1kg, Tortas Holandesas, Bolos de Festa, Frotas de caminhões refrigerados e Promotores de campo)."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "anti_ai_slop": "Reject generic purple neon gradients. Embrace the warmth and business authority of deep executive slate (#0B1120) with warm confectionery amber (#D97706) accents.",
+    "spacing_and_hierarchy": "Ensure generous internal padding (p-5 or p-6 on cards, p-6 or p-8 on main containers). Avoid cramped layouts.",
+    "chart_standards": "Use Recharts with custom tooltips, formatted currency in tooltips, smooth curves, and legible typography.",
+    "testing_ready": "Guarantee 100% of functional flows have data-testid for automated verification."
+  }
+}
