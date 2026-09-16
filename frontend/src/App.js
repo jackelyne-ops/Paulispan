@@ -13,6 +13,10 @@ import Pedidos from "@/pages/Pedidos";
 import NovoPedido from "@/pages/NovoPedido";
 import PedidoDetalhe from "@/pages/PedidoDetalhe";
 import Financeiro from "@/pages/Financeiro";
+import Devolucoes from "@/pages/Devolucoes";
+import Logistica from "@/pages/Logistica";
+import Promotores from "@/pages/Promotores";
+import Analisar from "@/pages/Analisar";
 
 function App() {
   return (
@@ -30,6 +34,7 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="analisar" element={<Analisar />} />
             <Route path="clientes" element={<Clientes />} />
             <Route path="clientes/:id" element={<ClienteDetalhe />} />
             <Route path="produtos" element={<Produtos />} />
@@ -37,6 +42,9 @@ function App() {
             <Route path="pedidos/novo" element={<NovoPedido />} />
             <Route path="pedidos/:id" element={<PedidoDetalhe />} />
             <Route path="financeiro" element={<Financeiro />} />
+            <Route path="devolucoes" element={<Devolucoes />} />
+            <Route path="logistica" element={<Logistica />} />
+            <Route path="promotores" element={<Promotores />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

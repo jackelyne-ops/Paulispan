@@ -5,13 +5,11 @@ import {
   Store,
   Cake,
   Truck,
-  MapPinCheck,
   ClipboardCheck,
   RotateCcw,
   CircleDollarSign,
-  BarChart3,
-  FolderTree,
-  SlidersHorizontal,
+  Sparkles,
+  Cake as CakeIcon,
   X,
 } from "lucide-react";
 
@@ -20,6 +18,7 @@ const groups = [
     label: "Principal",
     items: [
       { to: "/", label: "Dashboard", icon: LayoutDashboard, testid: "nav-dashboard" },
+      { to: "/analisar", label: "Analisar", icon: Sparkles, testid: "nav-analisar", accent: true },
     ],
   },
   {
@@ -31,21 +30,17 @@ const groups = [
     ],
   },
   {
-    label: "Gestão & Controle",
+    label: "Operação & Campo",
     items: [
-      { to: "/financeiro", label: "Financeiro & Margem", icon: CircleDollarSign, testid: "nav-financeiro" },
-      { to: "/relatorios", label: "Relatórios", icon: BarChart3, testid: "nav-relatorios", disabled: true },
-      { to: "/cadastros", label: "Cadastros", icon: FolderTree, testid: "nav-cadastros", disabled: true },
+      { to: "/logistica", label: "Logística & Frotas", icon: Truck, testid: "nav-logistica" },
+      { to: "/promotores", label: "Promotores & Execução", icon: ClipboardCheck, testid: "nav-promotores" },
+      { to: "/devolucoes", label: "Devoluções", icon: RotateCcw, testid: "nav-devolucoes" },
     ],
   },
   {
-    label: "Operação (em breve)",
+    label: "Gestão & Controle",
     items: [
-      { to: "/logistica", label: "Logística & Frotas", icon: Truck, testid: "nav-logistica", disabled: true },
-      { to: "/entregas", label: "Monitor de Entregas", icon: MapPinCheck, testid: "nav-entregas", disabled: true },
-      { to: "/promotores", label: "Promotores", icon: ClipboardCheck, testid: "nav-promotores", disabled: true },
-      { to: "/devolucoes", label: "Devoluções", icon: RotateCcw, testid: "nav-devolucoes", disabled: true },
-      { to: "/configuracoes", label: "Configurações", icon: SlidersHorizontal, testid: "nav-config", disabled: true },
+      { to: "/financeiro", label: "Financeiro & Margem", icon: CircleDollarSign, testid: "nav-financeiro" },
     ],
   },
 ];
@@ -53,13 +48,8 @@ const groups = [
 export default function Sidebar({ open, onClose }) {
   return (
     <>
-      {/* Mobile backdrop */}
       {open && (
-        <div
-          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
-          onClick={onClose}
-          data-testid="sidebar-backdrop"
-        />
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden" onClick={onClose} data-testid="sidebar-backdrop" />
       )}
 
       <aside
@@ -68,27 +58,21 @@ export default function Sidebar({ open, onClose }) {
         }`}
         data-testid="sidebar"
       >
-        {/* Brand */}
         <div className="flex items-center justify-between px-5 py-5 border-b border-[#1E293B]">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 shadow-md">
-              <Cake className="h-5 w-5 text-white" />
+              <CakeIcon className="h-5 w-5 text-white" />
             </div>
             <div>
               <div className="font-brand text-lg font-bold tracking-tight text-white">Paulispan</div>
               <div className="text-[10px] font-semibold uppercase tracking-wider text-amber-400/80">ERP · Gestão Total</div>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden"
-            data-testid="sidebar-close-btn"
-          >
+          <button onClick={onClose} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden" data-testid="sidebar-close-btn">
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
           {groups.map((group) => (
             <div key={group.label}>
@@ -98,22 +82,6 @@ export default function Sidebar({ open, onClose }) {
               <div className="space-y-1">
                 {group.items.map((item) => {
                   const Icon = item.icon;
-                  if (item.disabled) {
-                    return (
-                      <div
-                        key={item.to}
-                        className="sidebar-link cursor-not-allowed opacity-40"
-                        data-testid={item.testid}
-                        title="Em breve — Fase seguinte"
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span>{item.label}</span>
-                        <span className="ml-auto rounded-md bg-slate-800 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-slate-400">
-                          Breve
-                        </span>
-                      </div>
-                    );
-                  }
                   return (
                     <NavLink
                       key={item.to}
@@ -125,6 +93,9 @@ export default function Sidebar({ open, onClose }) {
                     >
                       <Icon className="h-4 w-4" />
                       <span>{item.label}</span>
+                      {item.accent && (
+                        <span className="ml-auto rounded-md bg-amber-500/20 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-300">Novo</span>
+                      )}
                     </NavLink>
                   );
                 })}
@@ -133,11 +104,10 @@ export default function Sidebar({ open, onClose }) {
           ))}
         </nav>
 
-        {/* Footer */}
         <div className="border-t border-[#1E293B] px-5 py-4">
-          <div className="text-[10px] uppercase tracking-wider text-slate-500">Fase Atual</div>
-          <div className="mt-1 text-sm font-semibold text-slate-200">Fase 1 · Comercial</div>
-          <div className="mt-1 text-[11px] text-slate-500">v1.0 · Paulispan Confeitaria</div>
+          <div className="text-[10px] uppercase tracking-wider text-slate-500">Sistema</div>
+          <div className="mt-1 text-sm font-semibold text-slate-200">Paulispan ERP · v1.5</div>
+          <div className="mt-1 text-[11px] text-slate-500">Comercial · Logística · Trade</div>
         </div>
       </aside>
     </>

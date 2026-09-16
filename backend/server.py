@@ -26,6 +26,7 @@ from auth import (  # noqa: E402
 )
 from models import LoginRequest, UserCreate, UserOut  # noqa: E402
 from routes_business import router as business_router  # noqa: E402
+from routes_operacao import router as ops_router  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # MongoDB
@@ -179,6 +180,7 @@ async def root():
 # Include business routes
 # ---------------------------------------------------------------------------
 api_router.include_router(business_router)
+api_router.include_router(ops_router)
 app.include_router(api_router)
 
 
