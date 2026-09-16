@@ -226,7 +226,7 @@ async def criar_produto(payload: ProdutoCreate, user=Depends(require_permission(
 
     exists = await db.produtos.find_one({"sku": payload.sku})
     if exists:
-        raise HTTPException(status_code=400, detail="SKU já cadastrado")
+        raise HTTPException(status_code=409, detail="SKU já cadastrado")
 
     now = _now()
     doc = payload.model_dump()
