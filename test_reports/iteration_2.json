@@ -1,0 +1,46 @@
+{
+  "summary": "Fase 2-5 testadas. Backend: 17/17 pytest passaram (devoluções, caminhões, motoristas, rotas com cálculos, agências, promotores, visitas + execução + agenda semanal, ocorrências, analisar com filtros combinados — lucro=receita-custo-devolvido validado). Frontend: navegação, tabs, form Analisar e execução com KPIs (receita/lucro/custo/top_produtos/top_clientes/por_regiao/chart_diario) OK; modal Devoluções abre. PORÉM bug crítico impede criação do PRIMEIRO registro via UI em 6 módulos (Caminhões, Motoristas, Rotas, Agências, Promotores, Ocorrências) — modal não renderiza quando a lista está vazia. Após seed via API, todos os modals abrem normalmente.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "SimpleCrud (Logistica.jsx linhas 357-381 e Promotores.jsx equivalente)",
+        "issue": "Os modais (CaminhaoModal, MotoristaModal, RotaModal, AgenciaModal, PromotorModal, OcorrenciaModal) são passados como children do SimpleCrud. Em SimpleCrud, {children} só é renderizado quando items.length > 0. Consequência: clicar no botão 'add-btn' quando a lista está vazia chama setModal({}) mas o componente do modal nunca é montado, então nenhum diálogo aparece. Usuário fica travado no estado vazio e não consegue criar o primeiro registro pela UI. Confirmado: após seed via API, o mesmo botão abre o modal corretamente.",
+        "selector": "caminhoes-add-btn, motoristas-add-btn, rotas-add-btn, agencias-add-btn, promotores-add-btn, ocorrencias-add-btn (todos com lista vazia)",
+        "priority": "CRITICAL"
+      },
+      {
+        "component": "Analisar.jsx",
+        "issue": "Review spec pede data-testid an-kpi-receita e an-kpi-lucro (presentes: OK) — an-kpi-devolvido não existe como KPI card independente (só 'receita/custo/lucro'). Ajustar spec ou adicionar KPI. Não bloqueia.",
+        "selector": "an-kpi-devolvido",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_paulispan_ops.py", "/app/test_reports/pytest/ops_results.xml"],
+  "action_items": [
+    "CRÍTICO: Corrigir SimpleCrud (Logistica.jsx e Promotores.jsx) para renderizar sempre o modal, movendo-o para fora do prop children — ex.: renderizar {modal && <XxxModal .../>} no mesmo nível do <SimpleCrud> (padrão já usado no bloco Visitas em Promotores.jsx). Aplicar em: Caminhoes, Motoristas, Rotas, Agencias, Promotores, Ocorrencias.",
+    "Opcional: adicionar KPI card 'Devolvido' em Analisar.jsx com data-testid=an-kpi-devolvido para alinhar com spec.",
+    "Continuar do iteration_1: 400→409 em SKU duplicado (routes_business.py)."
+  ],
+  "critical_code_review_comments": [
+    "SimpleCrud está com responsabilidade excessiva: acoplando header+empty+tabela+modais. Extrair renderização do modal para fora do children resolve o bug e clarifica ownership.",
+    "routes_operacao.py: geração de código RT-{count+1} pode colidir sob concorrência (mesmo padrão de routes_business.py); usar counters collection atômica.",
+    "routes_operacao.py: em `/visitas/gerar-agenda-semanal` a data comparada em `exists` usa o mesmo instante (segundos inclusive), o que pode gerar duplicações se rodado múltiplas vezes com micro-diferenças. Considere comparar por dia/hora agregada.",
+    "routes_operacao.py: filtro por `categoria` no /analisar carrega todos produtos; ok para escala atual, mas ineficiente em bases grandes.",
+    "routes_operacao.py: `_enrich_visita` faz N+1 queries (promotor, cliente, agência) por visita — ok agora, mas otimizar com batch quando a lista crescer."
+  ],
+  "updated_files": ["/app/backend/tests/test_paulispan_ops.py", "/app/test_reports/iteration_2.json"],
+  "success_rate": {"backend": "100% (17/17)", "frontend": "~70% (bug crítico impede fluxos de criação a partir de estado vazio em 6 telas)"},
+  "test_credentials": "admin@paulispan.com.br / admin123",
+  "seed_data_creation": "Testes pytest criam TEST_OPS_ cliente/produto/pedido/caminhão/motorista/rota/agência/promotor/visita/ocorrência/devolução e limpam ao final. Um caminhão UI-TEST foi criado e apagado via curl durante a investigação do bug.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend Fase 2-5 100% verde via /app/backend/tests/test_paulispan_ops.py. Bug crítico frontend documentado: modal fica dentro do children de SimpleCrud que só renderiza quando items>0. Após fix do main agent, revalidar clicando add-btn em cada tab (Caminhões/Motoristas/Rotas/Agências/Promotores/Ocorrências) sem seed prévio.",
+  "rca of the issue": "SimpleCrud (Logistica.jsx:357-381 e Promotores.jsx:465-491) usa o pattern: `items.length===0 ? EmptyState : <div>{children}</div>`. As chamadas do tipo `<SimpleCrud>...<table .../>{modal && <XxxModal/>}</SimpleCrud>` colocam o modal DENTRO dos children. Portanto o modal nunca é montado no estado vazio, mesmo com setModal({}) sendo chamado. Reprodução: nova instalação → logistica → aba Caminhões (vazia) → click no botão 'caminhoes-add-btn' → nada acontece. Após seed via POST /api/caminhoes, o mesmo click abre modal normalmente. Correção: mover `{modal && <XxxModal .../>}` para FORA do <SimpleCrud> — já aplicado corretamente no bloco de Visitas (Promotores.jsx:289) que funciona sem esse bug."
+}
